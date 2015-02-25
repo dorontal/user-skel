@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# find . -name \*\~ | grep -v \.DEL | while read FILE
+# find . -name '* *~' | grep -v \.DEL | while read FILE
+# do
+#     /bin/ls $FILE
+#     # echo $FILE
+# done
+
+(
+IFS=$'\n'
+for i in `find . -name \*\~ | grep -v \.DEL`; do 
+    /bin/ls "$i"
+    mv -f "$i" ${HOME}/.DEL/
+done
+)
