@@ -26,11 +26,7 @@ echo $backups
 tar czvhf $HOME/BACKUPS/dot_files$DATE.tgz $backups
 
 # destructive
-for i in .[a-z,A-Z]*; do
-    if [ -e $MY_DIR/$i ]; then
-        mv -f $MY_DIR/$i $HOME
-    fi
-done
-
+cp -f $MY_DIR/.[a-z,A-Z]* $HOME
+# more kind
 cp -ri $MY_DIR/bin $HOME
 cp -ri $MY_DIR/lib $HOME
