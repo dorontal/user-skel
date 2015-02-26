@@ -28,7 +28,7 @@ tar czvhf $HOME/BACKUPS/dot_files$DATE.tgz $backups
 # destructive
 for i in .[a-z,A-Z]*; do
     if [ -e $MY_DIR/$i ]; then
-        mv -i $MY_DIR/$i $HOME
+        mv -f $MY_DIR/$i $HOME
     fi
 done
 
