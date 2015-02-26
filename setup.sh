@@ -28,7 +28,7 @@ tar czvhf $HOME/BACKUPS/dot_files$DATE.tgz $backups
 # destructive
 cd $MY_DIR
 for i in .[a-z,A-Z]*; do
-    if [ "$i" != ".gitignore" ]; then
+    if [[ "$i" != ".gitignore" && "$i" != ".git" ]]; then
         cp -f $i $HOME
     fi
 done
