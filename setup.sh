@@ -26,7 +26,13 @@ echo $backups
 tar czvhf $HOME/BACKUPS/dot_files$DATE.tgz $backups
 
 # destructive
-cp -f $MY_DIR/.[a-z,A-Z]* $HOME
+cd $MY_DIR
+for i in .[a-z,A-Z]*; do
+    if [ "$i" != ".gitignore" ]; then
+        cp -f $i $HOME
+    fi
+done
+
 # more kind
-cp -ri $MY_DIR/bin $HOME
-cp -ri $MY_DIR/lib $HOME
+cp -ri bin $HOME
+cp -ri lib $HOME
