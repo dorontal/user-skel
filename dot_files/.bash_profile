@@ -11,7 +11,7 @@ SSH_ENV="$HOME/.ssh/environment"
 
 function start_agent {
     echo -n "Initialising new SSH agent..."
-    /usr/bin/ssh-agent -s | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
     echo succeeded
     chmod 600 "${SSH_ENV}"
     . "${SSH_ENV}" > /dev/null
@@ -26,7 +26,7 @@ if [ -f "${SSH_ENV}" ]; then
         start_agent
     }
 else
-    ~/bin/zap ssh-agent
+    /home/dtal/bin/zap ssh-agent
     start_agent
 fi
 
@@ -34,6 +34,3 @@ fi
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
-
-export ANDROID_HOME=/usr/local/src/android-sdk-linux
-export PATH=$PATH:$ANDROID_HOME/tools

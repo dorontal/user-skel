@@ -16,17 +16,17 @@ fi
 cd $HOME
 backups=""
 for i in .[a-z,A-Z]*; do
-    if [ -e $MY_DIR/$i ]; then
+    if [ -e $MY_DIR/dot_files/$i ]; then
         backups="$i $backups"
     fi
 done
-echo $backups
+echo "Backing up: $backups"
 
 # backup
 tar czvhf $HOME/BACKUPS/dot_files$DATE.tgz $backups
 
 # destructive
-cd $MY_DIR
+cd $MY_DIR/dot_files
 for i in .[a-z,A-Z]*; do
     if [[ "$i" != ".gitignore" && "$i" != ".git" ]]; then
         cp -f $i $HOME
@@ -34,5 +34,8 @@ for i in .[a-z,A-Z]*; do
 done
 
 # more kind
-cp -ri bin $HOME
-cp -ri lib $HOME
+cd $MY_DIR
+# cp -ri bin $HOME
+# cp -ri lib $HOME
+rsync -avz bin $home/
+rsync -avz lib $home/
