@@ -37,5 +37,5 @@ done
 cd $MY_DIR
 # cp -ri bin $HOME
 # cp -ri lib $HOME
-rsync -avz bin $home/
-rsync -avz lib $home/
+rsync -avz bin $HOME/
+rsync -avz lib $HOME/
