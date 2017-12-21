@@ -13,10 +13,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
 fi
 
-# some more ls aliases
-
-
-
+# ls aliases
 if [ "$HOST_OS" == "Darwin" ]; then
     # on a mac it's a different ls, override previous alias if made
     alias ls='ls -G'
