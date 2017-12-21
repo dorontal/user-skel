@@ -4,7 +4,7 @@
 
 # If not running interactively, don't do anything
 case "$-" in
-    *i*) echo -e "Interactive shell.\nPATH:\n$PATH" ;;
+    *i*) echo -e "Interactive shell." ;;
     *)   return
 esac
 
@@ -95,7 +95,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # some env variables
-export PATH=$PATH:$HOME/bin
+export PATH=/usr/local/bin:$PATH:$HOME/bin
 export EDITOR='emacs -nw'
 
 # see https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-python-on-your-raspberry-pi/
