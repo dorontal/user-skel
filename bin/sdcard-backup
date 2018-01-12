@@ -1,0 +1,6 @@
+#!/bin/bash
+
+DEVICE=$1
+BACKUP_FILE=$2
+
+sudo dd bs=4M if=${DEVICE} | gzip > ${BACKUP_FILE}
