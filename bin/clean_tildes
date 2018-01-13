@@ -7,10 +7,10 @@
 #     # echo $FILE
 # done
 
-(
-IFS=$'\n'
+# (
+# IFS=$'\n'
 for i in `find . -name \*\~ | grep -v \.DEL`; do 
     /bin/ls "$i"
     mv -f "$i" ${HOME}/.DEL/
 done
-)
+# )
