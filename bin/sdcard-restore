@@ -3,4 +3,4 @@
 BACKUP_FILE=$1
 DEVICE=$2
 
-sudo gzip -dc ${BACKUP_FILE} | dd bs=4M of=${DEVICE}
+sudo gzip -dc ${BACKUP_FILE} | sudo dd bs=4M of=${DEVICE}
