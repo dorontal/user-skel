@@ -97,11 +97,3 @@ fi
 # some env variables
 export PATH=/usr/local/bin:$PATH:$HOME/bin
 export EDITOR='emacs -nw'
-
-# see https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-python-on-your-raspberry-pi/
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-
-gpip(){
-   PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
-}
