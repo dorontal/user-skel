@@ -1,0 +1,93 @@
+#!/bin/bash
+
+FROM_BASE="/home/dtal"
+TO_BASE="/media/dtal/ExternalUSB/home_dtal"
+
+DIRS="
+accounting
+health
+src
+apartment
+hobbies
+tai_chi
+bib
+teaching
+bin
+IRS
+business
+jokes
+cv
+js-snippets
+cvsroot
+lib
+data
+lyrics
+Desktop
+matlab
+tutoring
+Documents
+dot_files
+misc
+UNCONFUSION
+Downloads
+Music
+user-skel
+dwhelper
+phone
+Videos
+Pictures
+WireframeSketcher
+employment
+Public
+workspace
+greek_citizenship
+recipes
+writeups
+"
+
+tar czvf \
+    /home/dtal/BACKUPS/dot_jpilot/dot_jpilot_`date +\%F`.tgz \
+    /home/dtal/.jpilot
+
+
+# rsync flags:
+# -a, --archive               archive mode; equals -rlptgoD (no -H,-A,-X)
+# -v, --verbose               increase verbosity
+# -u, --update                skip files that are newer on the receiver
+# -t, --times                 preserve modification times
+# -p, --perms                 preserve permissions
+
+for dir in $DIRS; do
+    rsync -avut \
+        --exclude cvsroot \
+	--exclude '*.iso' \
+	--exclude '*.zip' \
+	--exclude '*.tgz' \
+	--exclude '*.gz' \
+	--exclude '*.bz2' \
+        --exclude '*~' \
+        --exclude '.*~' \
+        --exclude '.PREV' \
+        --exclude '.OLD' \
+        --exclude '.#*' \
+        --exclude '*.o' \
+        --exclude '*.pyc' \
+        --exclude '*id_dsa*' \
+        --exclude Cache \
+        --exclude tmp \
+        --exclude duckwater_models \
+        --exclude .DEL \
+        --exclude .settings \
+        --exclude .metadata \
+        --exclude .pyc \
+        --exclude nohup.out \
+        --exclude Music \
+        --exclude .git \
+        --exclude node_modules \
+        --exclude OLD \
+        --exclude resources \
+        --exclude plugins \
+        --exclude www \
+        --backup-dir=/home/dtal/BACKUPS/rsync \
+        "$FROM_BASE/$dir" "$TO_BASE/$dir"
+done
