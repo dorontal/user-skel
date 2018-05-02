@@ -1,7 +1,7 @@
 ;;; .emacs
 
 (setq window-width 80)
-(setq window-height 43)
+(setq window-height 76)
 
 ;;; use auto-install when need new .el 
 ;(load "~/lib/emacs/elisp/auto-install.el")
@@ -65,14 +65,17 @@
 ;;;(add-hook 'c++-mode-hook 'turn-on-font-lock)
 (add-hook 'c-mode-hook 'c++-mode)
 
-(defun my-python-indent-setup ()
-  (setq indent-tabs-mode nil)
-  (setq py-continuation-offset 0)
-  (turn-on-font-lock)
-  (setq tab-width 4)
-  (setq py-indent-offset 4))
-
-(add-hook 'python-mode-hook 'my-python-indent-setup)
+(add-hook 'python-mode-hook
+          '(lambda()
+             ;; only indent with spaces, no tabs
+             (setq indent-tabs-mode nil)
+             ;; always end a file with a newline
+             (setq require-final-newline t)
+             (setq-default tab-width 4)
+             (setq-default py-indent-offset 4)             
+             ;; (setq py-continuation-offset 0)
+             ;; (turn-on-font-lock)
+             ))
 
 ;;; turn on auto-fill mode automatically in text mode and related modes
 (add-hook 'text-mode-hook
@@ -80,7 +83,7 @@
 
 (add-hook 'html-mode-hook
           (lambda ()
-            (set (make-local-variable 'sgml-basic-offset) 2)))
+            (set (make-local-variable 'sgml-basic-offset) 4)))
 
 ;; Are we running XEmacs or Emacs?
 (defvar running-xemacs (string-match "XEmacs" emacs-version))
