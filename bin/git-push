@@ -1,4 +1,12 @@
 #!/bin/bash
+
+MFLAG="minor"
+if [ "$1" == "" ]; then
+    echo "No arguments. Using -m minor."
+else
+    MFLAG="$1"
+fi
+
 git add -A
-git commit -m minor
+git commit -m "$MFLAG"
 git push
