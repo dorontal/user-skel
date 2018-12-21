@@ -39,3 +39,7 @@ cd $MY_DIR
 # cp -ri lib $HOME
 rsync -av bin $HOME/
 rsync -av lib $HOME/
+
+# get some packages
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install -y --no-install-recommends emacs 
