@@ -42,4 +42,4 @@ rsync -av lib $HOME/
 
 # get some packages
 sudo apt-get update && sudo apt-get upgrade
-sudo apt-get install -y --no-install-recommends emacs 
+sudo apt-get install -y --no-install-recommends emacs virtualenvwrapper locate
