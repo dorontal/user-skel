@@ -1,0 +1,38 @@
+#!/usr/bin/perl
+
+# Author Doron Tal
+# Created: Jan, 2004
+# $Revision: 1.1 $ $Date: 2004/01/15 03:12:29 $
+
+# Usage: pfile expr [filenames]
+
+# This program runs through all filenames provided either on the
+# command line or piped through stdout and runs perl expression 'expr'
+# on each file.  In 'expr', use '$_' as the wilcard referring to the
+# current filename being processed.  If you're in the middle of an
+# expression that's changing '$_' and decide to restore the old value
+# of '$_', it is always stored in the variable '$was', which you can
+# use in 'expr'.
+#
+# Examples
+# --------
+#
+# List all filenames with extension "*.IMG" and containing the
+# substring "RAD" or "RAL":
+#
+#     find /afs/ic-afs.arc.nasa.gov/mer-a/ -print | pfile \
+#            'print $_ if /RAD.*IMG/ || /RAL.*IMG/'
+#
+
+($expr = shift) || die "Usage: pfile perl_expr [filenames]\n";
+
+if (!@ARGV) {
+   @ARGV = <STDIN>;
+   chop(@ARGV);
+}
+
+for (@ARGV) {
+   $was = $_;
+   eval $expr;
+   die $@ if $@;
+}

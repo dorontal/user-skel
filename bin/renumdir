@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+from stat import S_ISREG, ST_MTIME, ST_MODE
+import os, sys, time
+
+nargs = len(sys.argv)-1
+
+if nargs == 1:
+    # only one argument supplied, assume its the new filename without extension
+    newname = sys.argv[1]
+    dirpath = r'.'
+elif nargs == 2:
+    dirpath = sys.argv[1]
+    newname = sys.argv[2]
+else:
+    sys.stderr.write("wrong args")
+    sys.exit(1)
+
+# path to the directory (relative or absolute)
+# dirpath = sys.argv[1] if len(sys.argv) == 2 else r'.'
+
+# get all entries in the directory w/ stats
+entries = (os.path.join(dirpath, fn) for fn in os.listdir(dirpath))
+entries = ((os.stat(path), path) for path in entries)
+
+# leave only regular files, insert creation date
+entries = ((stat[ST_MTIME], path)
+           for stat, path in entries if S_ISREG(stat[ST_MODE]))
+#NOTE: on Windows `ST_CTIME` is a creation date 
+#  but on Unix it could be something else
+#NOTE: use `ST_MTIME` to sort by a modification date
+
+count = 1
+for cdate, path in sorted(entries):
+    basename = os.path.basename(path)
+    ext = os.path.splitext(basename)[1]
+    newname_format = newname+"%03i"+ext
+    newname_final = newname_format % count
+    if os.path.exists(newname_final):
+        print "(-)old: ", basename, "; new (EXISTS): ", newname_final
+    else:
+        print "(+)old: ", basename, "; new (EXISTS): ", newname_final
+        os.rename(basename, newname_final)
+    count += 1
