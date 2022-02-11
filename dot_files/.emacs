@@ -18,6 +18,7 @@
 (load "~/lib/emacs/elisp/tss.el")
 (load "~/lib/emacs/elisp/typescript.el")
 (load "~/lib/emacs/elisp/haml-mode.el")
+(load "~/lib/emacs/elisp/dart-mode.el")
 
 ;;; set up the autoinclude hack 
 (load "~/lib/emacs/elisp/autoinclude.el")
@@ -34,6 +35,7 @@
 (add-to-list 'auto-mode-alist '("\\.ts$" . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.scss$" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.dart$" . dart-mode))
 
 ;;; Get tabs the way I want
 (setq-default indent-tabs-mode nil)
