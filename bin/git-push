@@ -8,18 +8,17 @@ git status
 echo \
 "----------------------------------- PUSH -------------------------------------"
 
-echo -n "Type commit log message or <Enter> to push: "
-read MESSAGE
-if [ "$MESSAGE" == "" ]; then
-    set MESSAGE = "minor"
-fi
-
-# MESSAGE="minor"
-# if [ "$1" == "" ]; then
-#     echo "No arguments. Using -m minor."
-# else
-#     MESSAGE="$1"
+# echo -n "Type commit log message or <Enter> to push: "
+# read MESSAGE
+# if [ "$MESSAGE" == "" ]; then
+#     set MESSAGE = "minor"
 # fi
+MESSAGE="minor"
+if [ "$1" == "" ]; then
+    echo "No arguments. Using -m minor."
+else
+    MESSAGE="$1"
+fi
 
 git add -A
 git commit -m "$MESSAGE"

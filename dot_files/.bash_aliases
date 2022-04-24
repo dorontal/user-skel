@@ -77,3 +77,5 @@ alias cls=clear
 alias pg="ps auxww | head -1; ps auxww | grep -v grep | egrep"
 
 alias wl="wc -l"
+
+alias cleanup='sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g"'
