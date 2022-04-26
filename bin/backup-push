@@ -1,0 +1,71 @@
+#!/bin/bash
+
+HOSTNAME=`hostname -s`
+
+if [ "$HOSTNAME" == "thing4" ]; then
+    TO_ROOT="thing5:/home/dtal"
+elif [ "$HOSTNAME" == "thing5" ]; then
+    TO_ROOT="thing4:/home/dtal"
+else
+    echo "ERROR: please specify thing4 or thing5 as the source argument"
+fi
+
+DIRS="
+        Documents
+        Downloads
+        UNCONFUSION
+        bin
+        lib
+        Pictures
+        repos
+"
+
+# rsync flags:
+# -a, --archive               archive mode; equals -rlptgoD (no -H,-A,-X)
+# -v, --verbose               increase verbosity
+# -u, --update                skip files that are newer on the receiver
+# -t, --times                 preserve modification times
+# -p, --perms                 preserve permissions
+
+for dir in $DIRS; do
+    echo ---------------------------------------------------------------------
+    echo $dir
+    echo ---------------------------------------------------------------------
+    rsync -avuzt \
+        --exclude cvsroot \
+	--exclude '*.iso' \
+	--exclude '*.deb' \
+	--exclude '*.zip' \
+	--exclude '*.tgz' \
+	--exclude '*.gz' \
+	--exclude '*.xz' \
+	--exclude '*.bz2' \
+	--exclude '.dart_tool' \
+        --exclude '*~' \
+        --exclude '.*~' \
+        --exclude '.PREV' \
+        --exclude '.OLD' \
+        --exclude '.#*' \
+        --exclude '*.o' \
+        --exclude '*.pyc' \
+        --exclude '*id_dsa*' \
+        --exclude Cache \
+        --exclude tmp \
+        --exclude .DEL \
+        --exclude .settings \
+        --exclude .metadata \
+        --exclude .pyc \
+        --exclude nohup.out \
+        --exclude Music \
+        --exclude .git \
+        --exclude node_modules \
+        --exclude OLD \
+        --exclude resources \
+        --exclude plugins \
+        --exclude env \
+        --exclude bower_components \
+        --exclude coverage \
+        --exclude www \
+        --backup-dir=/home/dtal/BACKUPS/rsync \
+        "$HOME/${dir}/" "$TO_ROOT/${dir}/"
+done
