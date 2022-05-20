@@ -97,4 +97,4 @@ if ! shopt -oq posix; then
 fi
 
 # env vars we need go here (?)
-export CHROME_EXECUTABLE="`which brave-browser`"
+export CHROME_EXECUTABLE="chromium"

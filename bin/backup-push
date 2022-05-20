@@ -18,6 +18,11 @@ DIRS="
         lib
         Pictures
         repos
+        misc
+        finance
+        health
+        business
+        ebooks
 "
 
 # rsync flags:
