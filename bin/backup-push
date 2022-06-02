@@ -11,6 +11,7 @@ else
 fi
 
 DIRS="
+        .local
         Documents
         Downloads
         UNCONFUSION
@@ -23,6 +24,7 @@ DIRS="
         health
         business
         ebooks
+        health
 "
 
 # rsync flags:
@@ -38,6 +40,7 @@ for dir in $DIRS; do
     echo ---------------------------------------------------------------------
     rsync -avuzt \
         --exclude cvsroot \
+	--exclude '*.apk' \
 	--exclude '*.iso' \
 	--exclude '*.deb' \
 	--exclude '*.zip' \
