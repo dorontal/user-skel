@@ -16,4 +16,4 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-PATH="$PATH:$HOME/bin:$HOME/local/flutter/bin"
+PATH="$PATH:$HOME/bin:$HOME/local_src/flutter/bin"
