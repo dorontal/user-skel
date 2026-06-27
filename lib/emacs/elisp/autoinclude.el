@@ -92,9 +92,15 @@ matches none of the regular expressions."
 
 ;;; Add autoinclude handling to find-file-not-found-hooks.
 
-(or (memq 'include-auto-include-files find-file-not-found-hooks)
-    (setq find-file-not-found-hooks (nconc find-file-not-found-hooks
-					   '(include-auto-include-files))))
+;;; NOTE: file-not-found-hooks (and its alias find-file-not-found-hooks)
+;;; was deprecated, so replacing this code:
+;;;
+;;;(or (memq 'include-auto-include-files find-file-not-found-hooks)
+;;;    (setq find-file-not-found-hooks (nconc find-file-not-found-hooks
+;;;					   '(include-auto-include-files))))
+;;; with:
+(add-hook 'find-file-not-found-functions 'include-auto-include-files )
+
 ;;;
 ;;; End of file
 ;;; ------------------------------------------------------------
